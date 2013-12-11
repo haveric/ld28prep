@@ -19,7 +19,7 @@ Ball.prototype.move = function() {
 }
 
 Ball.prototype.checkCollisions = function(paddle) {
-    var randomAngle = 0;//(Math.random()*10)-5;
+    var randomAngle = (Math.random()*10)-5;
     if (this.x - this.radius < 0) {
         this.x = this.radius;
         this.angle = -this.angle + randomAngle;
