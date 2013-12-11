@@ -1,3 +1,6 @@
+var CANVAS_WIDTH = 800,
+    CANVAS_HEIGHT = 600;
+
 (function () {
     var keysDown = [],
         gameRunning = false,
@@ -6,7 +9,6 @@
         canvas,
         context,
         paddle;
-    
     
     // shim layer with setTimeout fallback
     window.requestAnimFrame = (function(){
@@ -40,13 +42,24 @@
         }, false);
         
         canvas = document.getElementById("gameCanvas");
-        canvas.setAttribute("width", 800);
-        canvas.setAttribute("height", 600);
+        canvas.setAttribute("width", CANVAS_WIDTH);
+        canvas.setAttribute("height", CANVAS_HEIGHT);
         
-        console.log("Canvas: " + canvas.width + ", " + canvas.height);
         context = canvas.getContext('2d');
         
         paddle = new Paddle();
+        
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
+        addBall(new Ball());
         
         gameRunning = true;
         animLoop();
@@ -76,8 +89,25 @@
     }
     
     var render = function(){
-        context.clearRect(0,0,canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
         paddle.draw(context);
+        
+        var ballLength = ballArray.length;
+        for (var i = 0; i < ballLength; i++) {
+            ballArray[i].move();
+            ballArray[i].checkCollisions(paddle);
+            ballArray[i].draw(context);
+            
+            
+            
+        }
+        var j = 0;
+        for (var i = 0; i < ballLength; i++) {
+            if (ballArray[i-j].toRemove) {
+                removeBall(i-j);
+                j++;
+            }
+        }
     }
 
     init();

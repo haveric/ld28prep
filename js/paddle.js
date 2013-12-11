@@ -15,12 +15,12 @@ Paddle.prototype.moveLeft = function() {
 
 Paddle.prototype.moveRight = function() {
     this.x += this.speed;
-    if (this.x + this.width > 800) {
-        this.x = 800 - this.width;
+    if (this.x + this.width > CANVAS_WIDTH) {
+        this.x = CANVAS_WIDTH - this.width;
     }
 }
 
 Paddle.prototype.draw =  function(context) {
-    context.fillStyle = 'rgba(0, 80, 0, .7)';
+    context.fillStyle = 'rgba(0, 80, 0, 1)';
     context.fillRect(this.x, this.y, this.width, this.height);
 }
